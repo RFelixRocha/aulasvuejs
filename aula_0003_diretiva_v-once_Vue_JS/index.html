@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Primeira aula de vue.js</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" placeholder="Informe uma descrição" v-model="name">
+    <p>{{ name }}</p>
+    <p>{{ name }}</p>
+    <p>{{ name }}</p>
+    <p>{{ name }}</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            name:'Minha terceira aula de vue.js'
+        }
+    })
+</script>
+</body>
+</html>

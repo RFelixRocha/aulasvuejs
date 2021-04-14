@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos de Teclados no Vue JS  -- Teclas modificadoras do sistema</title>
+</head>
+<body>
+<div id="app">
+
+    <a :href="urllink" @click.prevent="showAlert">{{ textLink }}</a>
+    <form action="#" method="post" @submit.prevent="showAlert">
+        <input type="text" placeholder="Telefone">
+        <button type="submit"> Enviar</button>
+    </form>
+
+    <button type="submit" @click.once="showAlert"> Click</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el:'#app',
+    data:{
+        textLink: 'Felix.com',
+        urllink: 'http://www.etrac.com.br'
+    },
+      methods: {
+        changeValue(){
+            alert('CRT');
+        },
+          showAlert(event){
+            alert('Clicou no link')
+          }
+      }
+  })
+</script>
+</body>
+</html>

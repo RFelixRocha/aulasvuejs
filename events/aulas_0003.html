@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos de Teclados no Vue JS</title>
+</head>
+<body>
+<div id="app">
+    <input type="text"
+           @keyup.enter.tab="changeValue"
+           @keyup.up="changeValueTwo"
+           @keyup="getCodeKey"
+    >
+    {{ valueText }}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el:'#app',
+    data:{
+        valueText: ''
+    },
+      methods: {
+        changeValue(event){
+            this.valueText = event.target.value
+        },
+          changeValueTwo(){
+            alert('teste');
+          },
+          getCodeKey(event){
+            console.log(event.keyCode);
+          }
+      }
+  })
+</script>
+</body>
+</html>

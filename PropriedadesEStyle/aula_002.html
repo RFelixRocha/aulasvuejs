@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>(Watchers) Observadores Vue JS</title>
+</head>
+<body>
+<div id="app">
+  <button @click="count++">Aumentar</button>
+    <input type="text" v-model="count">
+  <p> {{count}}</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el:'#app',
+    data:{
+      count:0
+    },
+      watch:{
+        count:function (value) {
+            let insta = this
+
+            setTimeout(function () {
+                insta.count = 0;
+            },3000)
+        }
+      }
+  })
+</script>
+</body>
+</html>

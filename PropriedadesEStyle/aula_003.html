@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Styles Vue JS</title>
+
+    <style>
+        .active{
+            background: green;
+        }
+        .no-active{
+            background: red;
+        }
+        .default {
+            background: yellow;
+        }
+        .text-red{
+            background: red;
+        },
+        .text-white{
+            background: white;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+
+    <button @click="isActive = !isActive">Alterar a classe</button>
+    <div :class="{ active : isActive }">
+        Exemplo 0001
+    </div>
+    <div :class="isActive ? 'active' : 'no-active'">
+        Exemplo 0002
+    </div>
+
+    <div class="default" :class="isActive ? 'active' : 'no-active'">
+        Exemplo 0003
+    </div>
+
+    <div :class="['default',isActive ? 'active' : 'no-active']">
+        Exemplo 0004
+    </div>
+    <div :class="classObject">
+        Exemplo 0005
+    </div>
+    <div :style="{display: ['-webkit-flex','-moz-flex','flex']}">
+        Exemplo 0006
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el:'#app',
+    data:{
+      isActive:true,
+        classObject:{
+          active:false,
+            'text-red': false,
+            'color-withe':false
+        }
+    }
+  })
+</script>
+</body>
+</html>

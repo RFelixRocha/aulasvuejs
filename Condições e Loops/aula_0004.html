@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Filtros no Vue</title>
+    <style>
+        .active{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h4>{{ title }}</h4>
+    <div v-for="(obj, indice) in arrayObject" :class="{active: obj.completed}">
+       {{ obj.id }} -- {{ obj.name | toLowerCase()}}  -- {{ obj.descripiton | toUpperCase()}}
+    </div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    Vue.filter('toLowerCase',function (val) {
+        return val.toLowerCase()
+    })
+
+    new Vue({
+        el:'#app',
+        data:{
+            title:'Lista de tarefas',
+            arrayObject: [
+                {id:1,name:'Fernanda',descripiton:'Santos',completed:false},
+                {id:3,name:'Jonas',descripiton:'joana',completed:true},
+                {id:5,name:'Maria',descripiton:'caio',completed:false},
+                {id:6,name:'Josã',descripiton:'junor',completed:true}
+            ]
+        },
+        filters:{
+            toUpperCase(val) {
+                return val.toUpperCase()
+            }
+        }
+    })
+</script>
+</body>
+</html>

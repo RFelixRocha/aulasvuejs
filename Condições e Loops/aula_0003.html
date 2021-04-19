@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Loops de Repetição no Vue JS (Diretiva v-for)</title>
+    <style>
+        .active{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div v-for="i in 10">
+        {{ i }}
+    </div>
+    <hr>
+    <h4>For de Array com indice</h4>
+    <div v-for="(product, indice) in products">
+        {{ indice }} -- {{ product }}
+    </div>
+    <hr>
+    <h4>For de Objeto</h4>
+    <div v-for="(obj, indice) in arrayObject" :class="{active: obj.isActive}">
+        {{ indice }} -- {{ obj.id }} -- {{ obj.name }}
+    </div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            products:[
+                'A','B','C','D','E','F'
+            ],
+            arrayObject: [
+                {id:1,name:'Fernanda',descripiton:'Santos',isActive:false},
+                {id:3,name:'Jonas',descripiton:'joana',isActive:true},
+                {id:5,name:'Maria',descripiton:'caio',isActive:false},
+                {id:6,name:'Josã',descripiton:'junor',isActive:true}
+
+            ]
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="assets/css/style.css" rel="stylesheet" >
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/png">
+    <link href="../fontawesome-free/css/all.css" rel="stylesheet" >
+    
+    <title>Jogo do 21</title>
+</head>
+<body>
+<div id="app" class="container">
+    
+   <div class="row text-center">
+    <h3>Jogo do 21</h3>
+       <div :class="['col-6', playerActived == 1 ? 'active' : '']">
+        <img src="assets/player1.png" alt="João" >
+        <p> João <span class="badge rounded-pill bg-primary">{{ numberHistocPlayerOne }}</span></p>
+        <p><span><strong>Pontos: </strong>{{ playerOne.points }}</span></p>
+       </div>
+       <div :class="['col-6', playerActived == 2 ? 'active' : '']">
+           <img src="assets/player2.png" alt="Maria">
+           <p>Maria <span class="badge rounded-pill bg-dark">{{ numberHistocPlayerTwo }}</span></p>
+           <p><span><strong>Pontos: </strong>{{ playerTwo.points }}</span></p>
+       </div>
+       <div class="controls col">
+            <a href="#" @click.prevent="changePlayer" class="btn btn-success"><i class="fas fa-forward"></i>&nbsp;Pular</a>
+            <a href="#" @click.prevent="endgame" class="btn btn-info"><i class="fas fa-check"></i>&nbsp;Finalizar</a>
+            <a href="#" @click.prevent="resetGame" class="btn btn-danger"><i class="fas fa-pause"></i>&nbsp;Resetar</a>
+       </div>
+   </div>
+
+   <hr>
+   <div class="row text-center">
+    <div class="col-6">
+        <img  @click.prevent="selectCart" src="assets/baralho-cartas.png" alt="Baralho" class="carts">
+       </div>
+       <div v-if="valueCart.value" class="col-6">
+           <div>
+               <img :src="'assets/carts/'+valueCart.value+'.png'" alt="Carta" class="cart">
+           </div>
+       </div>
+   </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="assets/js/vue-toastify.umd.min.js"></script>
+
+<script>
+ 
+    new Vue({
+        el:'#app',
+        data: {
+
+            playerActived: 1,
+
+            playerOne: {
+                points : 0,
+                historic : []
+            },
+
+            playerTwo: {
+                points : 0,
+                historic : []
+            },
+
+            valueCart: {
+                value: null
+            },
+
+        },
+
+        computed: {
+            
+            numberHistocPlayerOne () {
+                return this.playerOne.historic.length
+            },
+
+            numberHistocPlayerTwo () {
+                return this.playerTwo.historic.length
+            }
+
+        },
+
+        methods: {
+
+            changePlayer(){
+
+                this.playerActived = this.playerActived == 1 ? 2 : 1
+
+                this.valueCart.value = null
+
+            },
+
+            selectCart() {
+                
+                this.valueCart.value = Math.floor( Math.random() * 13 ) + 1
+
+                if(this.playerActived == 1)
+                {
+                    this.playerOne.points += this.valueCart.value
+                    this.playerOne.historic.push(this.valueCart.value)
+                }
+
+                if(this.playerActived == 2)
+                {  
+                    this.playerTwo.points += this.valueCart.value
+                    this.playerTwo.historic.push(this.valueCart.value)
+                }
+
+                if(this.playerOne.points >= 21 || this.playerTwo.points >= 21)
+                    this.endgame()
+                
+            },
+
+            endgame () {
+
+                let self = this
+
+                if(this.playerOne.points <= 21 && this.playerOne.points > this.playerTwo.points)
+                    alert('Parabéns João!! você foi o campeão.')
+                else
+                if(this.playerTwo.points <= 21 && this.playerTwo.points > this.playerOne.points)
+                    alert('Parabéns Maria!! você foi a campeã.')
+                else if(this.playerOne.points > 21)
+                    alert('Parabéns Maria!! você foi a campeã.')
+                else if(this.playerTwo.points > 21)
+                    alert('Parabéns João!! você foi o campeão.')
+                else 
+                    alert('Empate técnico!!')
+
+
+                setTimeout(function(){
+                    self.resetGame()
+                },3000)
+
+            },
+
+            resetGame () {
+
+                this.playerActived    = 1
+                this.valueCart.value  = null 
+                this.playerOne.points = 0
+                this.playerOne.historic = []
+                this.playerTwo.points = 0
+                this.playerTwo.historic = []
+
+            }
+
+        }
+    })
+</script>
+</body>
+</html>
